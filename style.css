@@ -109,7 +109,7 @@ footer .project-details-heading h1 {
 
 .project-details {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 footer .details-card {
@@ -118,7 +118,7 @@ footer .details-card {
   border-radius: 10px;
   margin-bottom: 25px;
   padding: 10px;
-  width: 165px;
+  width: 185px;
   height: 210px;
 
   transition-duration: 0.5s;
