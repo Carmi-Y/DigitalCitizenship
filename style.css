@@ -271,3 +271,17 @@ a:hover{
 }
 
 /* End colors */
+
+
+/* Mobile design */
+@media screen and (max-width: 449px) {
+  #details-container {
+    width: 100%;
+    margin-right: 0px;
+  }
+
+  footer .project-details-heading h1 {
+    max-width: 100%;
+    margin-right: 0px;
+  }
+} 
