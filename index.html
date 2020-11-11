@@ -5,10 +5,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>בדיקת זכאות לאזרחות דיגיטלית!</title>
-  <link rel="icon" type="image/png" href="./favicon.png"/>
+  <link rel="icon" type="image/png" href="./favicon.png" />
   <style>
     @import url('./style.css');
   </style>
+  <script src="./logic.js" async="async"></script>
 </head>
 
 <body>
@@ -26,11 +27,7 @@
       <p>בואו להגשים את החלום לאזרחות דיגיטלית</p>
     </div>
     <section class="questionnaire draw-meduim-background">
-      <button class="btn draw-border">
-        בואו נתחיל
-        <hr>
-        </hr>
-      </button>
+      <button onclick="startQuestionnaire(this)" class="btn draw-border">בואו נתחיל</button>
     </section>
   </main>
   <footer>
