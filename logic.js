@@ -2,42 +2,67 @@
 let score = 0;
 
 // Keep track of the question the user has just answered
-let currentQuestion = null;
+let currentAnswer = null;
+
+// Html dom element for questionnaire
+let questionnaireElm = document.querySelector('.questionnaire');
 
 // An array to hold all the questions
 let questions = [
     {
         number: 1,
         Title: "שאלה ראשונה",
-        text: "",
+        text: "האם את.ה יליד דיגיטלי?",
         options: [
-            { text: 'כן', add: 1 },
-            { text: 'לא', add: -1 }
+            { id: 1, text: 'כן', add: 1 },
+            { id: 2, text: 'לא', add: -1 },
         ]
     }
 ]
 
 
-// Use to keep track of the options the user chose to try to track bugs
-let debugInfo = {}
-
 
 // Functions
 startQuestionnaire = (btn) => {
-    btn.remove();
-    console.log("Let's do this!")
-    loadQuestion(0)
+    loadQuestion(1)
 }
 
 loadQuestion = (questionNumber) => {
+    // Remove previous content in questionnaireElm
+    questionnaireElm.textContent = '';
 
-    // check if that's the user's first question
-    if(questionNumber === 0) {
+    // check if it's first question the user answers
+    if (questionNumber === 1) {
         // Make sure the score is reset to 0
         score = 0;
     }
 
-    console.log("Now serving question: " + questionNumber)
-    currentQuestion = questions[questionNumber]
-    console.log(currentQuestion)
+    // Find the relevant question
+    const currentQuestion = questions.find(x => (x.number === questionNumber))
+
+    // Check if the data is ok
+    if (currentQuestion !== undefined && currentQuestion !== null) {
+        // Prepare the options
+        let currentOptionsHtml = '';
+
+        currentQuestion.options.forEach(option => {
+            currentOptionsHtml += `<button class="btn draw-border">${option.text}</button>`
+        });
+
+        // Prepare question for dispaly
+        let questionHtml = `<h1>${currentQuestion.Title}</h1>
+                            <h2>${currentQuestion.text}</h2>
+                            <div class="options">
+                                ${currentOptionsHtml}                        
+                            </div>`
+
+        // Display qusetion
+        questionnaireElm.innerHTML = questionHtml
+    }
+    else {
+        questionnaireElm.innerHTML = "Something is wrong, please contact dev. Index passed to function: " + questionNumber
+    }
+
+
+
 }
