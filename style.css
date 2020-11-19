@@ -46,10 +46,30 @@ main p {
     margin-top: 40px;
 }
 
+.questions-stage {
+    max-width: 650px;
+    width: 100%;
+}
+
+.question-number {
+    text-align: right;
+}
+
+.options {
+    margin: auto;
+}
+
+.options .btn {
+    font-size: 1em;
+    line-height: 1;
+    margin-right: 10px;
+    margin-top: 15px;
+}
+
 .draw-background {
     padding: 10px;
     border-radius: 10px;
-    background-color: rgba(50, 53, 53, 0.9);
+    background-color: rgba(50, 53, 53, 0.8);
 }
 
 .draw-light-background {
