@@ -1,6 +1,10 @@
 // Keep track of the user score
 let score = 0;
 
+// Keep track of the last 'add' value that was added to the users score
+// as a result of a a prevvious question answered
+let scoreAdditions = new Stack();
+
 // Score threshold to be a digital native
 const dgigtalNativeThreshold = 10;
 
@@ -80,7 +84,9 @@ loadQuestion = (questionNumber) => {
 
 
         // Prepare question for dispaly
-        let questionHtml = `<p class="question-number">${currentQuestion.Title}</p>
+        let questionHtml = `<div>
+                                <p class="question-number">${currentQuestion.Title}</p>
+                            </div>
                             <p>${currentQuestion.text}</p>
                             <div class="options">
                                 ${currentOptionsHtml}                        
@@ -115,4 +121,16 @@ updateScoreAndFinish = (add) => {
     questionnaireElm.className = '';
 }
 
-updateScore = (add) => { score += add }
+updateScore = (add) => { 
+    score += add 
+    scoreAdditions.push(add)
+}
+
+// Return the score to the value added before this question
+// currentQuestionNumber : the number of the current question
+goBackAndRevertScore = (currentQuestionNumber) => {
+    // Add the nagative of the add value added as a result of answering the last question
+    score += (-scoreAdditions.pop())
+    // Score has been reverted, load previous question for display
+    loadQuestion(currentQuestionNumber)
+}
