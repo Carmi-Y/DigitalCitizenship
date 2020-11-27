@@ -109,20 +109,26 @@ updateScoreAndMoveToQuestion = (questionNumber, add) => {
 updateScoreAndFinish = (add) => {
     updateScore(add)
 
+    // Store the text that will be displayed to the user
+    let resultText;
+
     if (score >= dgigtalNativeThreshold) {
-        console.log('Digital native, cool')
+        resultText = 'Congratulations you are a digital native'
     }
     else {
-        console.log('Maybe next time boomer')
+        resultText = 'Maybe next time boomer'
     }
 
     // Display the cetificate
-    questionnaireElm.textContent = ''
-    questionnaireElm.className = '';
+    questionnaireElm.innerHTML = `
+                                    <h1>
+                                        ${resultText}
+                                    </h1>
+                                 `
 }
 
-updateScore = (add) => { 
-    score += add 
+updateScore = (add) => {
+    score += add
     scoreAdditions.push(add)
 }
 
