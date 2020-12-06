@@ -113,7 +113,17 @@ updateScoreAndFinish = (add) => {
     let result;
 
     if (score >= dgigtalNativeThreshold) {
-        certNum = parseInt(Math.random() * 1000000000);
+        // Generate data to put at the footer of the cetificate
+        // Randon certificate ID
+        const certNum = parseInt(Math.random() * 1000000000);
+
+        // Issue date
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const yyyy = today.getFullYear();
+
+        certDate = dd + '/' + mm  + '/' + yyyy;
 
         result = `
                     <h1>תעודת יליד דיגיטלי</h1>
@@ -123,6 +133,7 @@ updateScoreAndFinish = (add) => {
                     </div>
 
                     <p>מספר התעודה הינו: ${certNum}</p>
+                    <p>תאריך הפקה: ${certDate}</p>
                  `
     }
     else {
