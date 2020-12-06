@@ -171,6 +171,30 @@ a {
         text-decoration: none;
     }
 
+.recipient {
+    font-size: 2em;
+}
+
+    .recipient input {
+        background-color: transparent;
+        color: white;
+        font-size: 0.8em;        
+
+        border: none;
+        border-bottom: 1px solid white;
+        outline: none;
+        
+        margin: 0 0 8px 0;
+        padding: 0;
+        box-shadow: none;
+        box-sizing: content-box;
+        transition: box-shadow .3s, border .3s, -webkit-box-shadow .3s;
+    }
+
+        .recipient input::placeholder {
+            color: #bfc4cf;
+            opacity: 1; /* Firefox */
+        }
 
 /* Button*/
 
