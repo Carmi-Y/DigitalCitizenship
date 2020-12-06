@@ -22,7 +22,7 @@ let questions = [
         text: "האם את.ה יליד דיגיטלי?",
         options: [
             { id: 1, text: 'כן', add: 10 },
-            { id: 2, text: 'לא', add: -10 },
+            { id: 2, text: 'לא', add: 0 },
         ]
     }
 ]
@@ -110,21 +110,31 @@ updateScoreAndFinish = (add) => {
     updateScore(add)
 
     // Store the text that will be displayed to the user
-    let resultText;
+    let result;
 
     if (score >= dgigtalNativeThreshold) {
-        resultText = 'Congratulations you are a digital native'
+        certNum = parseInt(Math.random() * 1000000000);
+
+        result = `
+                    <h1>תעודת יליד דיגיטלי</h1>
+                    <div class="recipient">
+                        <span>תעודה זו מוענקת ל:</span>
+                        <input type="text" placeholder="מלאו כאן את שמכם" />
+                    </div>
+
+                    <p>מספר התעודה הינו: ${certNum}</p>
+                 `
     }
     else {
-        resultText = 'Maybe next time boomer'
+        result = `
+                    <h2>תודה לכם על שביררת את זכאותם לאזרחות דיגיטלית</h2>
+                    <p>לפי השאלון שלנו אינכם זכאים לתועדת יליד דיגיטלי ולכן לא תוכלו להמשיך בתהליך ההתאזרחות</p>
+                    <p>תודה רבה!</p>
+                 `
     }
 
     // Display the cetificate
-    questionnaireElm.innerHTML = `
-                                    <h1>
-                                        ${resultText}
-                                    </h1>
-                                 `
+    questionnaireElm.innerHTML = result
 }
 
 updateScore = (add) => {
