@@ -6,7 +6,7 @@ let score = 0;
 let scoreAdditions = new Stack();
 
 // Score threshold to be a digital native
-const dgigtalNativeThreshold = 10;
+const dgigtalNativeThreshold = 100;
 
 // Keep track of the question the user has just answered
 let currentAnswer = null;
@@ -19,12 +19,110 @@ let questions = [
     {
         number: 1,
         Title: "שאלה #1",
-        text: "האם את.ה יליד דיגיטלי?",
+        text: "כיצד בדרך כלל תנהלו שיחות עם חברים?",
+        options: [
+            { id: 1, text: 'הודעה כתובה או מוקלטת', add: 10 },
+            { id: 2, text: 'שיחת טלפון', add: 5 },
+            { id: 3, text: 'פנים אל פנים', add: 0 },
+        ]
+    },
+    {
+        number: 2,
+        Title: "שאלה #2",
+        text: "באיזו תדירות אתם נוטים לעדכן את הפרופילים ברשתות החברתיות שלכם?",
+        options: [
+            { id: 1, text: 'יומית', add: 10 },
+            { id: 2, text: 'שבועים', add: 10 },
+            { id: 3, text: 'חודשית', add: 10 },
+            { id: 4, text: 'אף פעם כמעט/אני לא מחזיק בפרופיל', add: 0 },
+        ]
+    },
+    {
+        number: 3,
+        Title: "שאלה #3",
+        text: "כיצד תעדיפו לקרוא ספר?",
+        options: [
+            { id: 1, text: 'מודפס', add: 0 },
+            { id: 2, text: 'דיגיטלי', add: 10 }
+        ]
+    },
+    {
+        number: 4,
+        Title: "שאלה #4",
+        text: 'האם הייתם מגדירים את עצמכם כ"טכנופובים"?',
+        options: [
+            { id: 1, text: 'כן', add: 0 },
+            { id: 2, text: 'לא', add: 10 }
+        ]
+    },
+    {
+        number: 5,
+        Title: "שאלה #5",
+        text: 'האם אי פעם התנסיתם עם שפת תכנות כלשהי?',
         options: [
             { id: 1, text: 'כן', add: 10 },
-            { id: 2, text: 'לא', add: 0 },
+            { id: 2, text: 'לא', add: 0 }
         ]
-    }
+    },
+    {
+        number: 6,
+        Title: "שאלה #6",
+        text: 'האם אתם מתעדכנים בטכנולוגיה חדשה המוצעת לשוק?',
+        options: [
+            { id: 1, text: 'כן', add: 10 },
+            { id: 2, text: 'רק אם זה נושא שמאוד מעניין אותי', add: 5 },
+            { id: 3, text: 'לא', add: 0 }
+        ]
+    },
+    {
+        number: 7,
+        Title: "שאלה #7",
+        text: 'מה תעשו במקרה של היתקלות בבעיה במחשב?',
+        options: [
+            { id: 1, text: 'אפנה לטכנאי', add: 0 },
+            { id: 2, text: 'אחפש פתרון לבעיה באינטרנט', add: 10 },
+            { id: 3, text: 'אפנה לחבר שמבין', add: 5 }
+        ]
+    },
+    {
+        number: 8,
+        Title: "שאלה #8",
+        text: 'במקרה בו הינכם מעוניינים ברכישת מוצר, לאן תפנו לקבלת מידע אודותיו? ',
+        options: [
+            { id: 1, text: 'אשאל חברים שמבינים', add: 5 },
+            { id: 2, text: 'אחפש מידע רלוונטי באינטרנט', add: 10 },
+            { id: 3, text: 'אפנה לחנות ואוועץ במוכרים', add: 0 }
+        ]
+    },
+    {
+        number: 9,
+        Title: "שאלה #9",
+        text: 'כיצד לרוב אתם צורכים תוכן לצרכי פנאי?',
+        options: [
+            { id: 1, text: 'באינטרנט או  בטלוויזיה ', add: 10 },
+            { id: 2, text: 'הצגות או ספרים ועיתונים למניהם', add: 0 }
+        ]
+    },
+    {
+        number: 10,
+        Title: "שאלה #10",
+        text: 'כמה זמן בממוצע אתם מבלים מול מסך בשעות הפנאי?',
+        options: [
+            { id: 1, text: 'שעה או פחות', add: 0 },
+            { id: 2, text: 'מעל שעה ועד שעתיים', add: 5 },
+            { id: 3, text: 'שלוש שעות ומעלה', add: 10 }
+        ]
+    },
+    {
+        number: 11,
+        Title: "שאלה #11",
+        text: 'במקרה בו אתם מזמינים אוכל, כיצד תעדיפו לעשות זאת?',
+        options: [
+            { id: 1, text: 'באמצעים דיגיטלים', add: 10 },
+            { id: 2, text: 'באמצעות הטלפון', add: 5 },
+            { id: 3, text: 'הגעה פיזית למקום והזמנה מעובדים במקום', add: 0 },
+        ]
+    },
 ]
 
 
@@ -123,7 +221,7 @@ updateScoreAndFinish = (add) => {
         const mm = String(today.getMonth() + 1).padStart(2, '0');
         const yyyy = today.getFullYear();
 
-        certDate = dd + '/' + mm  + '/' + yyyy;
+        certDate = dd + '/' + mm + '/' + yyyy;
 
         result = `
                     <h1>תעודת יליד דיגיטלי</h1>
@@ -160,4 +258,26 @@ goBackAndRevertScore = (currentQuestionNumber) => {
     score += (-scoreAdditions.pop())
     // Score has been reverted, load previous question for display
     loadQuestion(currentQuestionNumber)
+}
+
+
+// Helper functions
+exportQuestions = () => {
+    res = ""
+    newLine = "\n"
+    questions.forEach((q) => {
+        res += (newLine + "מספר השאלה: " + q.number)
+        res += (newLine + q.text + newLine)
+        q.options.forEach((option) => {
+            res += (newLine + "    אפשרות מספר: " + option.id)
+            res += (newLine + "    " + option.text)
+            res += (newLine + "    תוספת ניקוד על הבחירה בתשובה: " + option.add)
+            res += newLine
+        })
+    })
+
+    res += newLine
+    res+= "הרף לקבלת תעודה הינו: " + dgigtalNativeThreshold + " נקודות"
+
+    console.log(res)
 }
