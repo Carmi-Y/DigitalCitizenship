@@ -53,6 +53,7 @@ main p {
 
 .question-number {
     text-align: right;
+    overflow: hidden;
 }
 
 .options {
@@ -257,6 +258,18 @@ a {
 
     .btn:focus {
         outline: 2px dotted #55d7dc;
+    }
+
+    .back-btn {
+        color: white;
+        line-height: 1;
+        padding: 10px;
+        font-size: 1.2em;
+    }
+
+    .back-img {
+        width: 40px;
+        height: 40px;
     }
 
 /* End button */
