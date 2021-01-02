@@ -142,62 +142,66 @@ loadQuestion = (questionNumber) => {
     // Remove previous content in questionnaireElm
     questionnaireElm.textContent = '';
 
-
-    // Check if it's a question that needs extra logic
-    let isLastQuestion = false;
+    let displayBack = true
 
     // check if it's first question the user answers
     if (questionNumber === 1) {
         // Make sure the score is reset to 0
         score = 0;
+        // Make sure not to display the back button
+        displayBack = false
     }
 
-    // Check if it's the last answer (not else if in case there is only one question)
+    // Check if it's a question that needs extra logic
+    let isLastQuestion = false;
+
+    // (no else neended cause there is only one question)
     if (questionNumber === questions.length) {
         isLastQuestion = true;
     }
 
-    // Display the question as needed
+    // Display the question as needed (view logic here)
+
     // Find the relevant question
     const currentQuestion = questions.find(x => (x.number === questionNumber))
 
-    // Check if the relevant question was found
-    if (currentQuestion !== undefined && currentQuestion !== null) {
-        // Prepare the options
-        let currentOptionsHtml = '';
+    // Check if the relevant question wasn't found
+    if (currentQuestion === undefined || currentQuestion === null) {
+        questionnaireElm.innerHTML = "Something is wrong, please contact dev. Index passed to function: " + questionNumber
+    }
 
-        // Function calls on button clicks if it's a normal question
-        if (!isLastQuestion) {
-            currentQuestion.options.forEach(option => {
-                currentOptionsHtml += `<button onclick='updateScoreAndMoveToQuestion(${questionNumber + 1},${option.add})' class="btn draw-border">${option.text}</button>`
-            });
-        }
-        // Function calls on button clicks if it's the last question
-        else {
-            currentQuestion.options.forEach(option => {
-                currentOptionsHtml += `<button onclick='updateScoreAndFinish(${option.add})' class="btn draw-border">${option.text}</button>`
-            });
-        }
+    // Prepare the options
+    let currentOptionsHtml = '';
 
+    // Function calls on button clicks if it's a normal question
+    if (!isLastQuestion) {
+        currentQuestion.options.forEach(option => {
+            currentOptionsHtml += `<button onclick='updateScoreAndMoveToQuestion(${questionNumber + 1},${option.add})' class="btn draw-border">${option.text}</button>`
+        });
+    }
+    // Function calls on button clicks if it's the last question
+    else {
+        currentQuestion.options.forEach(option => {
+            currentOptionsHtml += `<button onclick='updateScoreAndFinish(${option.add})' class="btn draw-border">${option.text}</button>`
+        });
+    }
 
+    backButton = displayBack ? `<button type='button' onclick="goBackAndRevertScore(${questionNumber})" class='btn back-btn' title='חזרה לשאלה הקודמת'> &#8594; </button>` : ''
 
-        // Prepare question for dispaly
-        let questionHtml = `<div>
-                                <p class="question-number">${currentQuestion.Title}</p>
+    // Prepare question for dispaly
+    let questionHtml = `<div>
+                                <p class="question-number">${backButton} <span>${currentQuestion.Title}</span></p>
                             </div>
                             <p>${currentQuestion.text}</p>
                             <div class="options">
                                 ${currentOptionsHtml}                        
                             </div>`
 
-        // Display qusetion
-        questionnaireElm.innerHTML = questionHtml
-    }
-    // Question number isn't in the array
-    else {
-        questionnaireElm.innerHTML = "Something is wrong, please contact dev. Index passed to function: " + questionNumber
-    }
+    // Display qusetion
+    questionnaireElm.innerHTML = questionHtml
 }
+
+
 
 updateScoreAndMoveToQuestion = (questionNumber, add) => {
     updateScore(add)
@@ -229,9 +233,10 @@ updateScoreAndFinish = (add) => {
                         <span>תעודה זו מוענקת ל:</span>
                         <input type="text" placeholder="מלאו כאן את שמכם" />
                     </div>
-
                     <p>מספר התעודה הינו: ${certNum}</p>
                     <p>תאריך הפקה: ${certDate}</p>
+
+                    <p>כעת הוכיחו את יכולתכם ושמרו את התעודה שלכם בעזרת צילום מסך (:</p>
                  `
     }
     else {
@@ -257,27 +262,5 @@ goBackAndRevertScore = (currentQuestionNumber) => {
     // Add the nagative of the add value added as a result of answering the last question
     score += (-scoreAdditions.pop())
     // Score has been reverted, load previous question for display
-    loadQuestion(currentQuestionNumber)
-}
-
-
-// Helper functions
-exportQuestions = () => {
-    res = ""
-    newLine = "\n"
-    questions.forEach((q) => {
-        res += (newLine + "מספר השאלה: " + q.number)
-        res += (newLine + q.text + newLine)
-        q.options.forEach((option) => {
-            res += (newLine + "    אפשרות מספר: " + option.id)
-            res += (newLine + "    " + option.text)
-            res += (newLine + "    תוספת ניקוד על הבחירה בתשובה: " + option.add)
-            res += newLine
-        })
-    })
-
-    res += newLine
-    res+= "הרף לקבלת תעודה הינו: " + dgigtalNativeThreshold + " נקודות"
-
-    console.log(res)
+    loadQuestion(currentQuestionNumber - 1)
 }
