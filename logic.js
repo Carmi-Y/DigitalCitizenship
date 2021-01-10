@@ -6,7 +6,7 @@ let score = 0;
 let scoreAdditions = new Stack();
 
 // Score threshold to be a digital native
-const dgigtalNativeThreshold = 100;
+const dgigtalNativeThreshold = 80;
 
 // Keep track of the question the user has just answered
 let currentAnswer = null;
@@ -32,8 +32,8 @@ let questions = [
         text: "באיזו תדירות אתם נוטים לעדכן את הפרופילים ברשתות החברתיות שלכם?",
         options: [
             { id: 1, text: 'יומית', add: 10 },
-            { id: 2, text: 'שבועית', add: 10 },
-            { id: 3, text: 'חודשית', add: 10 },
+            { id: 2, text: 'שבועית', add: 5 },
+            { id: 3, text: 'חודשית', add: 5 },
             { id: 4, text: 'אף פעם כמעט/אני לא מחזיק בפרופיל', add: 0 },
         ]
     },
@@ -43,7 +43,7 @@ let questions = [
         text: "כיצד תעדיפו לקרוא ספר?",
         options: [
             { id: 1, text: 'מודפס', add: 0 },
-            { id: 2, text: 'דיגיטלי', add: 10 }
+            { id: 2, text: 'דיגיטלי', add: 5 }
         ]
     },
     {
@@ -79,7 +79,7 @@ let questions = [
         Title: "שאלה #7",
         text: 'מה תעשו במקרה של היתקלות בבעיה במחשב?',
         options: [
-            { id: 1, text: 'אפנה לטכנאי', add: 0 },
+            { id: 1, text: 'אפנה לטכנאי', add: 5 },
             { id: 2, text: 'אחפש פתרון לבעיה באינטרנט', add: 10 },
             { id: 3, text: 'אפנה לחבר שמבין', add: 5 }
         ]
@@ -89,7 +89,7 @@ let questions = [
         Title: "שאלה #8",
         text: 'במקרה בו הינכם מעוניינים ברכישת מוצר, לאן תפנו לקבלת מידע אודותיו? ',
         options: [
-            { id: 1, text: 'אשאל חברים שמבינים', add: 5 },
+            { id: 1, text: 'אשאל חברים שמבינים', add: 0 },
             { id: 2, text: 'אחפש מידע רלוונטי באינטרנט', add: 10 },
             { id: 3, text: 'אפנה לחנות ואוועץ במוכרים', add: 0 }
         ]
@@ -100,7 +100,7 @@ let questions = [
         text: 'כיצד לרוב אתם צורכים תוכן לצרכי פנאי?',
         options: [
             { id: 1, text: 'באינטרנט או  בטלוויזיה ', add: 10 },
-            { id: 2, text: 'הצגות או ספרים ועיתונים למניהם', add: 0 }
+            { id: 2, text: 'הצגות או ספרים ועיתונים למניהם', add: 5 }
         ]
     },
     {
@@ -108,7 +108,7 @@ let questions = [
         Title: "שאלה #10",
         text: 'כמה זמן בממוצע אתם מבלים מול מסך בשעות הפנאי?',
         options: [
-            { id: 1, text: 'שעה או פחות', add: 0 },
+            { id: 1, text: 'שעה או פחות', add: 5 },
             { id: 2, text: 'מעל שעה ועד שעתיים', add: 5 },
             { id: 3, text: 'שלוש שעות ומעלה', add: 10 }
         ]
