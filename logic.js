@@ -237,6 +237,7 @@ updateScoreAndFinish = (add) => {
                     <p>תאריך הפקה: ${certDate}</p>
 
                     <p>כעת הוכיחו את יכולתכם ושמרו את התעודה שלכם בעזרת צילום מסך (:</p>
+                    <a href="./pics/Certificate.jpeg">או לחצו כאן להורדת תעודה להדפסה</a>
                  `
     }
     else {
